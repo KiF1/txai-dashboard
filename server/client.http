@@ -1,0 +1,104 @@
+@baseUrl = http://localhost:4000
+@authToken = {{authenticate.response.body.access_token}}
+
+# @name create_account
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+    "name": "user normal",
+    "fullName": "User Normal Teste",
+    "email": "user@email.com",
+    "password": "123456789@",
+    "cpf": "01543814034",
+    "position": "user",
+    "photoUrl": ""
+}
+
+###
+
+# @name authenticate
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+    "password": "123456789@",
+    "cpf": "67364391088"
+}
+
+###
+
+# @name authenticate
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+    "password": "123456789@",
+    "cpf": "01543814034"
+}
+
+###
+
+# @name fetch-user
+GET {{baseUrl}}/accounts/b5417644-f7b8-4995-b896-776841b8bd6f
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name edit-user
+PUT {{baseUrl}}/accounts/b5417644-f7b8-4995-b896-776841b8bd6f
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "admin-master",
+    "fullName": "Admin Teste",
+    "email": "admin@email.com",
+    "password": "123456789@",
+    "cpf": "67364391088",
+    "position": "admin",
+    "photoUrl": "https://avatars.githubusercontent.com/u/96916125?v=4"
+}
+
+
+###
+# @name fetch_recent_products
+GET {{baseUrl}}/products?page=1&orderByDate=desc&orderByAlphabetic=asc
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name create-product
+POST {{baseUrl}}/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Produto Teste 23",
+    "price": 1200,
+    "quantity": 12,
+    "createdAt": "2024-10-04T15:30:00Z"
+}
+
+###
+
+# @name edit-product
+PUT {{baseUrl}}/products/202b55b5-2cb4-4f45-98c1-5fe4ac208406
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Produto Editado",
+    "price": 1500,
+    "quantity": 2,
+    "createdAt": "2024-10-06T15:30:00Z"
+}
+
+###
+
+# @name delete-product
+DELETE {{baseUrl}}/products/202b55b5-2cb4-4f45-98c1-5fe4ac208406
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
