@@ -22,7 +22,7 @@ interface FetchProducts {
 }
 
 export function TableProducts() {
-  const [totalPages, setTotalPages] = useState(7)
+  const [totalPages, setTotalPages] = useState(0)
   const [pageActive, setPageActive] = useState(1);
   const [orderByDate, setOrderByDate] = useState('desc')
   const [orderByAphabetic, setOrderByAphabetic] = useState('asc')
@@ -33,6 +33,7 @@ export function TableProducts() {
     queryKey: ["products", pageActive, orderByDate, orderByAphabetic],
     queryFn: async () => {
       const response = await api.get(`/products?page=${pageActive}&orderByDate=${orderByDate}&orderByAlphabetic=${orderByAphabetic}`);
+      console.log(response.data.totalProducts)
       setTotalPages(Math.ceil(response.data.totalProducts / 10));
 
       return response.data;
@@ -62,13 +63,6 @@ export function TableProducts() {
       setPageActive(page);
     }
   }
-
-  useEffect(() => {
-    if(data){
-      console.log(data.totalProducts)
-      setTotalPages(Math.ceil(data.totalProducts / 10));
-    }
-  }, [data])
 
   return (
     <>
@@ -100,7 +94,7 @@ export function TableProducts() {
           ) : (
             <div className='flex items-center gap-2'>
               <button type='button' onClick={() => handleFilterByAlphabetic('asc')} className='text-base text-black bg-transparent border-0 font-normal underline'>
-                De A a Z
+                De Z a A
               </button>
               <img src={DeAZ} className='w-5 h-5 text-black transfor rotate-180' />
             </div>
@@ -109,10 +103,10 @@ export function TableProducts() {
         <strong className='text-black font-medium text-sm'>Mostrando {pageActive} - 10 de {data?.totalProducts}</strong>
         <div className='flex items-center gap-4'>
           <button type='button' onClick={() => handleChangePage(1)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === 1}>
-            <ChevronDoubleLeftIcon className='w-5 h-5' color={pageActive === 1 ? '#E0E0E0' : '#B9C6C6'} />
+            <ChevronDoubleLeftIcon className='w-5 h-5' color={pageActive === 1 ? '#B9C6C6' : '#262F2F'} />
           </button>
           <button type='button' onClick={() => handleChangePage(pageActive - 1)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === 1}>
-            <ChevronLeftIcon className='w-5 h-5' color={pageActive === 1 ? '#E0E0E0' : '#B9C6C6'} />
+            <ChevronLeftIcon className='w-5 h-5' color={pageActive === 1 ? '#B9C6C6' : '#262F2F'} />
           </button>
           {Array.from({ length: totalPages }, (_, i) => (
             <button
@@ -125,18 +119,15 @@ export function TableProducts() {
             </button>
           ))}
           <button type='button' onClick={() => handleChangePage(pageActive + 1)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === totalPages}>
-            <ChevronRightIcon className='w-5 h-5' color={pageActive === totalPages ? '#E0E0E0' : '#B9C6C6'} />
+            <ChevronRightIcon className='w-5 h-5' color={pageActive === totalPages ? '#B9C6C6' : '#262F2F'} />
           </button>
           <button type='button' onClick={() => handleChangePage(totalPages)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === totalPages}>
-            <ChevronDoubleRightIcon className='w-5 h-5' color={pageActive === totalPages ? '#E0E0E0' : '#B9C6C6'} />
+            <ChevronDoubleRightIcon className='w-5 h-5' color={pageActive === totalPages ? '#B9C6C6' : '#262F2F'} />
           </button>
         </div>
       </div>
-
-      {/* Tabela de produtos */}
       <div className="relative overflow-x-auto">
         <table className="w-[65%] mx-auto my-8 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          {/* Cabeçalho */}
           <thead className="text-sm font-bold text-black">
             <tr>
               <th scope="col" className="px-6 py-3">Data Cadastro</th>
@@ -167,8 +158,35 @@ export function TableProducts() {
           </tbody>
         </table>
       </div>
-
-      {/* Modal para edição e exclusão */}
+      <div className='flex justify-between items-center px-8 my-12'>
+        <div />
+        <div />
+        <strong className='text-black font-medium text-sm'>Mostrando {pageActive} - 10 de {data?.totalProducts}</strong>
+        <div className='flex items-center gap-4'>
+          <button type='button' onClick={() => handleChangePage(1)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === 1}>
+            <ChevronDoubleLeftIcon className='w-5 h-5' color={pageActive === 1 ? '#B9C6C6' : '#262F2F'} />
+          </button>
+          <button type='button' onClick={() => handleChangePage(pageActive - 1)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === 1}>
+            <ChevronLeftIcon className='w-5 h-5' color={pageActive === 1 ? '#B9C6C6' : '#262F2F'} />
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i + 1}
+              type='button'
+              onClick={() => handleChangePage(i + 1)}
+              className={`text-sm ${pageActive === i + 1 ? 'text-white bg-green-600' : 'text-black bg-transparent'} border-0 font-medium w-8 h-8 rounded-full`}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button type='button' onClick={() => handleChangePage(pageActive + 1)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === totalPages}>
+            <ChevronRightIcon className='w-5 h-5' color={pageActive === totalPages ? '#B9C6C6' : '#262F2F'} />
+          </button>
+          <button type='button' onClick={() => handleChangePage(totalPages)} className='text-sm text-black bg-transparent border-0 font-normal' disabled={pageActive === totalPages}>
+            <ChevronDoubleRightIcon className='w-5 h-5' color={pageActive === totalPages ? '#B9C6C6' : '#262F2F'} />
+          </button>
+        </div>
+      </div>
       {showModalEdit ? <ModalEdit showModal={() => handleShowModal('edit')} /> : <></>}
       {showModalDelete ? <ModalDelete showModal={() => handleShowModal('delete')} /> : <></>}
     </>

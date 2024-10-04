@@ -30,7 +30,7 @@ export class FetchRecentProductsController {
       @Query('orderByDate', queryOrderByDateValidationPipe) orderByDate: OrderByDateQueryParamSchema,
       @Query('orderByAlphabetic', queryOrderByAlphabeticValidationPipe) orderByAlphabetic: OrderByAlphabeticQueryParamSchema
     ) {
-      const perPage = 1
+      const perPage = 10
 
       const products = await this.prisma.product.findMany({
         take: perPage,
