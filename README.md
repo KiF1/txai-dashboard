@@ -39,6 +39,9 @@ Para rodar o back-end, siga os passos abaixo:
    ```bash
    npm run start:dev
 
+8. **Acessar Swagger:**
+     - Para Acessar o swagger acesse: http://localhost:3333/swagger
+
 
 ## 📦 Rodar o Front
 
