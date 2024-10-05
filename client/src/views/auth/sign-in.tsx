@@ -60,14 +60,14 @@ export function SignIn() {
               CPF
               <input {...register("cpf")} type="text" placeholder="Insira seu CPF, somente os números" className="w-full px-4 py-2 text-black border border-gray-1000 rounded-md placeholder:text-gray-600" />
             </label>
-            {errors.cpf ? <span className="text-sm text-red-600 font-normal">{errors.cpf.message}</span> : <></>}
+            {errors.cpf && <span className="text-sm text-red-600 font-normal">{errors.cpf.message}</span>}
          </div>
          <div className="flex flex-col gap-2">
             <label className="w-full flex flex-col gap-2 text-sm text-black font-normal">
               Senha
               <input {...register("password")} type="text" placeholder="Insira sua senha" className="w-full px-4 py-2 text-black border border-gray-1000 rounded-md placeholder:text-gray-600" />
             </label>
-            {errors.password ? <span className="text-sm text-red-600 font-normal">{errors.password.message}</span> : <></>}
+            {errors.password && <span className="text-sm text-red-600 font-normal">{errors.password.message}</span>}
          </div>
         <div className="w-full flex justify-between items-center">
             <label className="flex gap-2 text-sm text-black font-normal">

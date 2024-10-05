@@ -6,13 +6,13 @@ POST {{baseUrl}}/accounts
 Content-Type: application/json
 
 {
-    "name": "user normal",
-    "fullName": "User Normal Teste",
-    "email": "user@email.com",
+    "name": "admin",
+    "fullName": "admin",
+    "email": "admin4@email.com",
     "password": "123456789@",
-    "cpf": "01543814034",
-    "position": "user",
-    "photoUrl": ""
+    "cpf": "01234567800",
+    "position": "admin",
+    "photoUrl": "https://avatars.githubusercontent.com/u/96916125?v=4"
 }
 
 ###
@@ -23,42 +23,28 @@ Content-Type: application/json
 
 {
     "password": "123456789@",
-    "cpf": "67364391088"
-}
-
-###
-
-# @name authenticate
-POST {{baseUrl}}/sessions
-Content-Type: application/json
-
-{
-    "password": "123456789@",
-    "cpf": "01543814034"
+    "cpf": "01234567800"
 }
 
 ###
 
 # @name fetch-user
-GET {{baseUrl}}/accounts/b5417644-f7b8-4995-b896-776841b8bd6f
+GET {{baseUrl}}/accounts/e0446412-ec9c-452a-bac7-095d85012fc7
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 ###
 
 # @name edit-user
-PUT {{baseUrl}}/accounts/b5417644-f7b8-4995-b896-776841b8bd6f
+PUT {{baseUrl}}/accounts/e0446412-ec9c-452a-bac7-095d85012fc7
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "name": "admin-master",
-    "fullName": "Admin Teste",
-    "email": "admin@email.com",
-    "password": "123456789@",
-    "cpf": "67364391088",
-    "position": "admin",
-    "photoUrl": "https://avatars.githubusercontent.com/u/96916125?v=4"
+    "name": "admin 3",
+    "fullName": "admin",
+    "email": "admin4@email.com",
+    "position": "admin"
 }
 
 
@@ -81,6 +67,12 @@ Authorization: Bearer {{authToken}}
     "quantity": 12,
     "createdAt": "2024-10-04T15:30:00Z"
 }
+
+###
+# @name fetch_product
+GET {{baseUrl}}/products/c25e2c45-fb67-45d8-980b-42da7b57f443
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 ###
 

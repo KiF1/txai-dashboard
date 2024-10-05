@@ -1,6 +1,5 @@
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { z } from "zod";
-import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -22,6 +21,7 @@ const createProductFormSchema = z.object({
 type CreateProductForm = z.infer<typeof createProductFormSchema>;
 
 export function ModalCreate({ showModal }: ShowModalCreateProps){
+  const [errorMessage, setErrorMessage] = useState(false);
   const [quantityProduct, setQuantityProduct] = useState<number>(1);
 
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<CreateProductForm>({
@@ -38,11 +38,10 @@ export function ModalCreate({ showModal }: ShowModalCreateProps){
     onSuccess: async () => {
       reset();
       showModal();
-      toast.success('Produto Salvo com sucesso');
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: () => {
+      setErrorMessage(true);
     }
   })
 
@@ -69,7 +68,7 @@ export function ModalCreate({ showModal }: ShowModalCreateProps){
                   Data de Lançamento
                   <input type="date" {...register('createdAt')} className="bg-transparent border-b-2 border-b-black" />
                 </label>
-                {errors.createdAt ? <span className="text-sm text-red-600 font-normal">{errors.createdAt.message}</span> : <></>}
+                {errors.createdAt && <span className="text-sm text-red-600 font-normal">{errors.createdAt.message}</span>}
               </div>
               <div className="grid grid-cols-[1fr,0.2fr] gap-4">
                 <div className="flex flex-col gap-2">
@@ -77,7 +76,7 @@ export function ModalCreate({ showModal }: ShowModalCreateProps){
                     Nome do Produto
                     <input type="text" {...register('name')} placeholder='Escreva o nome do produto' className="w-full px-4 py-2 text-black border border-gray-1000 rounded-md placeholder:text-gray-600" />
                   </label>
-                  {errors.name ? <span className="text-sm text-red-600 font-normal">{errors.name.message}</span> : <></>}
+                  {errors.name && <span className="text-sm text-red-600 font-normal">{errors.name.message}</span>}
                 </div>
                 <div className="w-full flex flex-col gap-2">
                   <strong className="text-sm font-normal text-black">Quantidade</strong>
@@ -98,9 +97,10 @@ export function ModalCreate({ showModal }: ShowModalCreateProps){
                     Valor R$
                     <input type="number" {...register('price', { valueAsNumber: true })} placeholder='Insira um Valor' className="w-full px-4 py-2 text-black border border-gray-1000 rounded-md placeholder:text-gray-600" />
                   </label>
-                  {errors.quantity ? <span className="text-sm text-red-600 font-normal">{errors.quantity.message}</span> : <></>}
+                  {errors.quantity && <span className="text-sm text-red-600 font-normal">{errors.quantity.message}</span>}
                 </div>
               </div>
+              {errorMessage && <span className="text-sm font-normal text-red-600">Erro ao criar Produto, tente novamente mais tarde!</span>}
             </div>
             <div className="bg-gray-800 px-12 pb-12 flex justify-end items-center">
               <button type="button" onClick={showModal} className="bg-transparent border-0 text-sm font-medium text-black p-2 w-[100px] hover:bg-gray-600  hover:mr-2 hover:rounded">Cancelar</button>

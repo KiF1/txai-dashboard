@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { AppLayout } from './views/_layouts/app'
-import { User } from './views/app/User'
 import { AuthLayout } from './views/_layouts/auth'
 import { SignIn } from './views/auth/sign-in'
 import { Dashboard } from './views/app/dashboard'
+import { CreateUser } from './views/app/user/CreateUser'
+import { EditUser } from './views/app/user/EditUser'
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/user',
-        element: <User />,
+        element: <CreateUser />,
+      },
+      {
+        path: '/user/:id',
+        element: <EditUser />,
       },
     ],
   },

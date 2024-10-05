@@ -1,8 +1,19 @@
 import Logo from '../../../../assets/logo.svg'
 import MenuHamburguer from '../../../../assets/hamburguer.svg'
-import { QuestionMarkCircleIcon, CalendarDaysIcon, BellIcon, UserCircleIcon } from '@heroicons/react/16/solid'
+import { QuestionMarkCircleIcon, CalendarDaysIcon, BellIcon } from '@heroicons/react/16/solid'
+import { useNavigate } from 'react-router-dom';
+import { queryClient } from '../../../../services/react-query';
+import { User } from '../../../../hooks/fetchUserData';
+
 
 export function HeaderDashboard(){
+  const navigate = useNavigate();
+  const cachedUser = queryClient.getQueryData<User>(["user"]);
+
+  function redirectToUserProfile(){
+    navigate(`/user/${cachedUser?.id}`, { replace: true })
+  }
+  
   return (
     <div className="w-full flex justify-between items-center px-8 py-10 border-b-2 border-b-gray-1000">
       <div className="flex gap-8 items-center">
@@ -24,10 +35,10 @@ export function HeaderDashboard(){
           <BellIcon color='#2D7575' className='w-5 h-5' />
           <div className='w-2 h-2 rounded-full bg-red-600 absolute top-0 right-0' />
         </div>
-        <div className='flex items-center gap-2'>
-          <UserCircleIcon className='w-5 h-5' color='#262F2F' />
-          <span className='text-sm text-black font-normal'>sistematxai</span>
-        </div>
+        <button onClick={redirectToUserProfile} className='flex items-center gap-2 bg-transparent border-0'>
+          <img src={cachedUser?.photoUrl} className='w-5 h-5 rounded-full' />
+          <span className='text-sm text-black font-normal'>{cachedUser?.name}</span>
+        </button>
       </div>
     </div>
   )

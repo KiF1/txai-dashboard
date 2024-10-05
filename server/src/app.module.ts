@@ -13,6 +13,7 @@ import { FetchAccountController } from './controllers/fetch-account.controller';
 import { EditAccountController } from './controllers/edit-account.controller';
 import { UploadPhotoController } from './controllers/upload-photo.controller';
 import { UploadService } from './services/upload.service';
+import { FetchProductController } from './controllers/fetch-product.controller';
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { UploadService } from './services/upload.service';
     DeleteProductController,
     FetchAccountController,
     EditAccountController,
-    UploadPhotoController
+    UploadPhotoController,
+    FetchProductController
   ],
   providers: [PrismaService, UploadService],
 })

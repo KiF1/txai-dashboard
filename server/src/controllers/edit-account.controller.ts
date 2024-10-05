@@ -1,5 +1,5 @@
 import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common'
-import { hash } from 'bcryptjs'
+import { compare, hash } from 'bcryptjs'
 import { CurrentUser } from 'src/auth/current-user-decorator'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 import { UserPayload } from 'src/auth/jwt.strategy'
@@ -11,10 +11,7 @@ const editAccountBodySchema = z.object({
   name: z.string(),
   fullName: z.string(),
   email: z.string().email(),
-  password: z.string(),
-  cpf: z.string(),
   position: z.string(),
-  photoUrl: z.string(),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(editAccountBodySchema)
@@ -34,7 +31,7 @@ export class EditAccountController {
     @CurrentUser() user: UserPayload,
     @Param('id') accountId: string,
   ) {
-    const { name, fullName, email, password, cpf, position, photoUrl } = body
+    const { name, fullName, email, position } = body
     const userId = user.sub
 
     const userLogged = await this.prisma.user.findUnique({
@@ -58,21 +55,13 @@ export class EditAccountController {
       throw new ConflictException('Já existe um usuário com o mesmo endereço de e-mail.')
     }
 
-    let hashedPassword: string | undefined;
-    if (password) {
-      hashedPassword = await hash(password, 8)
-    }
-
     await this.prisma.user.update({
       where: { id: accountId },
       data: {
         name,
         fullName,
         email,
-        cpf,
-        position,
-        photoUrl,
-        ...(hashedPassword && { password: hashedPassword }),
+        position
       }
     })
     
