@@ -3,6 +3,8 @@ name: Node CI/CD Pipeline
 on:
   push:
     branches: [main]
+    paths:
+      - 'server/**'
 
 jobs:
   build:
