@@ -1,4 +1,5 @@
 import { Controller, Get, HttpCode, Query, UseGuards } from '@nestjs/common'
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 import { ZodValidationPipe } from 'src/pipes/zod-validation-pipe'
 import { PrismaService } from 'src/services/prisma.service'
@@ -16,14 +17,35 @@ const orderByAlphabeticQueryParamSchema = z.string().optional().default('asc')
 const queryOrderByAlphabeticValidationPipe = new ZodValidationPipe(orderByAlphabeticQueryParamSchema)
 type OrderByAlphabeticQueryParamSchema = z.infer<typeof orderByAlphabeticQueryParamSchema>
 
-
+@ApiTags('Products') 
 @Controller('/products')
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 
 export class FetchRecentProductsController {
   constructor(private prisma: PrismaService) {}
   @Get()
   @HttpCode(200)
+  @ApiOperation({ summary: 'Busca produtos recentes com paginação e ordenação' })
+  @ApiResponse({
+    status: 200,
+    description: 'Lista de produtos encontrados.',
+    schema: {
+      example: {
+        products: [
+          {
+            id: '1',
+            name: 'Produto Exemplo',
+            price: 100,
+            quantity: 10,
+            createdAt: '2024-10-05T00:00:00.000Z',
+            creatorId: 'user-id-123',
+          },
+        ],
+        totalProducts: 50,
+      },
+    },
+  }) 
   
   async handle(
       @Query('page', queryPageValidationPipe) page: PageQueryParamSchema,

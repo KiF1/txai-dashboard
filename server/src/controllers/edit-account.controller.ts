@@ -1,4 +1,5 @@
 import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common'
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { compare, hash } from 'bcryptjs'
 import { CurrentUser } from 'src/auth/current-user-decorator'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
@@ -17,14 +18,57 @@ const editAccountBodySchema = z.object({
 const bodyValidationPipe = new ZodValidationPipe(editAccountBodySchema)
 type EditAccountBodySchema = z.infer<typeof editAccountBodySchema>
 
+@ApiTags('Accounts')
 @Controller('/accounts/:id')
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 
 export class EditAccountController {
   constructor(private prisma: PrismaService) {}
 
   @Put()
   @HttpCode(204)
+  @ApiOperation({ summary: 'Edita uma conta de usuário' })
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'ID da conta a ser editada',
+    example: '12345abcde',
+  }) 
+  @ApiBody({
+    schema: {
+      example: {
+        name: 'Maria Silva',
+        fullName: 'Maria Aparecida Silva',
+        email: 'maria.silva@example.com',
+        position: 'Gerente de Projetos',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 204,
+    description: 'Conta editada com sucesso. Nenhuma resposta é retornada.',
+  }) 
+  @ApiResponse({
+    status: 400,
+    description: 'Usuário não encontrado ou sem permissão.',
+    schema: {
+      example: {
+        statusCode: 400,
+        message: 'Usuário não encontrado.',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Conflito. Já existe um usuário com o mesmo e-mail.',
+    schema: {
+      example: {
+        statusCode: 409,
+        message: 'Já existe um usuário com o mesmo endereço de e-mail.',
+      },
+    },
+  })
   
   async handle(
     @Body(bodyValidationPipe) body: EditAccountBodySchema,

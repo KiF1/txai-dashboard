@@ -1,4 +1,5 @@
 import { BadRequestException, Body, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common'
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CurrentUser } from 'src/auth/current-user-decorator'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 import { UserPayload } from 'src/auth/jwt.strategy'
@@ -16,14 +17,32 @@ const editProductBodySchema = z.object({
 const bodyValidationPipe = new ZodValidationPipe(editProductBodySchema)
 type EditProductBodySchema = z.infer<typeof editProductBodySchema>
 
+@ApiTags('Products')
 @Controller('/products/:id')
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 
 export class EditProductController {
   constructor(private prisma: PrismaService) {}
 
   @Put()
   @HttpCode(204)
+  @ApiOperation({ summary: 'Edita um produto existente' })
+  @ApiResponse({
+    status: 204,
+    description: 'Produto editado com sucesso.',
+  }) 
+  @ApiResponse({
+    status: 400,
+    description: 'Produto não encontrado ou usuário sem permissão.',
+    schema: {
+      example: {
+        statusCode: 400,
+        message: 'Produto Não encontrado',
+        error: 'Bad Request',
+      },
+    },
+  })
   
   async handle(
     @Body(bodyValidationPipe) body: EditProductBodySchema,
