@@ -16,10 +16,6 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: '/user',
-        element: <CreateUser />,
-      },
-      {
         path: '/user/:id',
         element: <EditUser />,
       },
@@ -34,5 +30,9 @@ export const router = createBrowserRouter([
         element: <SignIn />,
       }
     ],
+  },
+  {
+    path: '/register',
+    element: <CreateUser />
   }
 ])

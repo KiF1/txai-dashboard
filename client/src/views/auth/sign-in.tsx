@@ -50,6 +50,10 @@ export function SignIn() {
     setSaveUser(event.target.checked);
   };
 
+  function redirectToCreateUser(){
+    navigate('/register');
+  }
+
 
   return(
     <div className="w-[65%] flex flex-col gap-6">
@@ -77,7 +81,10 @@ export function SignIn() {
           <span className="text-sm text-green-600 font-normal">Esqueci Minha Senha</span>
         </div>
         <button type="submit" disabled={isPending} className='w-[100%] p-2 bg-green-600 text-white font-sm font-medium rounded disabled:cursor-not-allowed disabled:opacity-50'>Entrar</button>
-        <strong className="text-sm text-black font-normal text-center">Não tem uma conta? <span className="text-sm text-green-600 font-normal"> cadastre-se agora</span></strong>
+        <button onClick={redirectToCreateUser} className="text-sm text-black font-normal text-center bg-transparent border-0">
+          Não tem uma conta? 
+          <span className="text-sm text-green-600 font-normal"> cadastre-se agora</span>
+        </button>
         <div className="flex justify-center align-center gap-2 pt-12">
           <strong className="text-sm text-gray-600 font-normal">Ajuda</strong>
           <img className="w-fit h-fit my-auto" src={Ellipse} />

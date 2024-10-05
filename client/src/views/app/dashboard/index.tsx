@@ -23,7 +23,7 @@ export function Dashboard(){
   }
 
   function navigateToCreaterUser(){
-    navigate('/user', { replace: true })
+    navigate('/register', { replace: true })
   }
 
   return(

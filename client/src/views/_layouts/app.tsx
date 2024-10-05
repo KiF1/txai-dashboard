@@ -8,7 +8,6 @@ export function AppLayout() {
 
   useEffect(() => {
     const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
-    console.log(token)
     if (!token) {
       navigate('/sign-in', { replace: true });
     }
