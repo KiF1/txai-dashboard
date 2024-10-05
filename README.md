@@ -103,6 +103,7 @@ server/
 │   ├── migrations/          # Contém as migrações do banco de dados geradas pelo Prisma.
 │   ├── schema.prisma        # Arquivo de definição do esquema do banco de dados, onde as tabelas e relações são definidas.
 ├── eslintrc.js              # Configuração do ESLint para manter a qualidade do código com regras de linting.
+├── seeder.json              # Seeder com dados para usuário e produtos
 ├── .gitignore               # Especifica quais arquivos e pastas devem ser ignorados pelo Git.
 ├── .prettierrc              # Configuração do Prettier para formatação automática de código.
 ├── client.http              # Arquivo que pode ser usado para testar as rotas da API com ferramentas como Insomnia ou Postman.

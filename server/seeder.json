@@ -1,0 +1,114 @@
+{
+  "usuarios": [
+    {
+    "name": "admin-master",
+    "fullName": "admin-master",
+    "email": "admin4@email.com",
+    "password": "123456789@",
+    "cpf": "01234567800",
+    "position": "admin",
+    "photoUrl": "https://avatars.githubusercontent.com/u/96916125?v=4"
+    },
+    {
+        "name": "user-1",
+        "fullName": "Usuário 1",
+        "email": "user1@email.com",
+        "password": "123456789@",
+        "cpf": "01234567800",
+        "position": "user",
+        "photoUrl": "https://cdn.icon-icons.com/icons2/788/PNG/512/user-1_icon-icons.com_65106.png"
+    },
+    {
+        "name": "user-2",
+        "fullName": "Usuário 2",
+        "email": "user2@email.com",
+        "password": "123456789@",
+        "cpf": "11234567800",
+        "position": "user",
+        "photoUrl": "https://cdn.icon-icons.com/icons2/788/PNG/512/user-1_icon-icons.com_65106.png"
+    },
+    {
+        "name": "user-3",
+        "fullName": "Usuário 3",
+        "email": "user3@email.com",
+        "password": "123456789@",
+        "cpf": "21234567800",
+        "position": "user",
+        "photoUrl": "https://cdn.icon-icons.com/icons2/788/PNG/512/user-1_icon-icons.com_65106.png"
+    }
+  ],
+  "produtos": [
+    {
+        "name": "Arroz",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-01T15:30:00Z"
+    },
+    {
+        "name": "Barco",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-02T15:30:00Z"
+    },
+    {
+        "name": "Carro",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-03T15:30:00Z"
+    },
+    {
+        "name": "Dado 1",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-04T15:30:00Z"
+    },
+    {
+        "name": "Dado 2",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-04T15:15:00Z"
+    },
+    {
+        "name": "Estrada",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-05T15:30:00Z"
+    },
+    {
+        "name": "Faca",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-06T15:30:00Z"
+    },
+    {
+        "name": "Gato",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-07T15:30:00Z"
+    },
+    {
+        "name": "Sapato",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-02T15:30:00Z"
+    },
+    {
+        "name": "Sandalia",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-04T15:15:00Z"
+    },
+    {
+        "name": "Macaco",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-04T15:15:00Z"
+    },
+    {
+        "name": "Navio",
+        "price": 1200,
+        "quantity": 12,
+        "createdAt": "2024-10-30T15:15:00Z"
+    }
+  ]
+}
