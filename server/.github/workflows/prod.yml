@@ -1,0 +1,38 @@
+name: Node CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Create .env file
+        run: |
+              echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+              echo "PORT=${{ secrets.PORT }}" >> .env
+              echo "JWT_PRIVATE_KEY=${{ secrets.JWT_PRIVATE_KEY }}" >> .env
+              echo "JWT_PUBLIC_KEY=${{ secrets.JWT_PUBLIC_KEY }}" >> .env
+              echo "AWS_S3_REGION=${{ secrets.AWS_S3_REGION }}" >> .env
+              echo "AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" >> .env
+              echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+      - name: Build docker image
+        run: docker build -t abnerst/txai-server .
+      - name: Publish image to docker hub
+        run: docker push abnerst/txai-server:latest
+        
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull abnerst/txai-server:latest
+      - name: Delete old container
+        run: docker rm -f nodejs-app-container
+      - name: Run docker container
+        run: docker run -d -p 3333:3333 --name nodejs-app-container abnerst/txai-server
