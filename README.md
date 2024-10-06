@@ -22,10 +22,12 @@ Para rodar o back-end, siga os passos abaixo:
 3. **Instale as dependências:**
    ```bash
    npm i
-
-4. **Inicie o Docker Compose:**
+    ```
+   
+4. **Inicie o Docker Compose (Antes de rodar o comando abaixo, certifique-se que possui o docker instalado e que o mesmo está rodando):**
    ```bash
    docker-compose up -d
+   ```
    
 5. **Gere o cliente do Prisma:**
    ```bash
