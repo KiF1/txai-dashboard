@@ -61,6 +61,9 @@ Para rodar o front-end, siga os passos abaixo:
    ```bash
    npm run dev
 
+4. **Editar Usuário - Admin:**
+   - Para Editar um usuário como Admin acesse: http://localhost:5173/:idUsuarioQueDesejaEditar
+
 
 ## 📂 Estrutura do Projeto
 
