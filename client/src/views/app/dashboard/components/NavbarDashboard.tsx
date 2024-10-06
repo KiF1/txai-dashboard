@@ -10,7 +10,7 @@ export function NavbarDashboard(){
       <span className='text-sm text-gray-600 font-medium'>/</span>
       <span className='text-sm text-gray-600 font-medium'>Gestão</span>
       <span className='text-sm text-gray-600 font-medium'>/</span>
-      <span className='text-sm text-green-600 font-medium'>Controle de Estoque</span>
+      <span className='text-sm text-green-600 font-medium'>Controle</span>
     </div>
   )
 }

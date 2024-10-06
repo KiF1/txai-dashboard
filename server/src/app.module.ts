@@ -14,6 +14,8 @@ import { EditAccountController } from './controllers/edit-account.controller';
 import { UploadPhotoController } from './controllers/upload-photo.controller';
 import { UploadService } from './services/upload.service';
 import { FetchProductController } from './controllers/fetch-product.controller';
+import { FetchAccountsController } from './controllers/fetch-accounts.controller';
+import { DeleteAccountController } from './controllers/delete-account.controller';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { FetchProductController } from './controllers/fetch-product.controller';
     FetchRecentProductsController, 
     EditProductController,
     DeleteProductController,
+    DeleteAccountController,
+    FetchAccountsController,
     FetchAccountController,
     EditAccountController,
     UploadPhotoController,

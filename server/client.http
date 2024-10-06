@@ -6,11 +6,11 @@ POST {{baseUrl}}/accounts
 Content-Type: application/json
 
 {
-    "name": "user-1",
-    "fullName": "Usuário 1",
-    "email": "user1@email.com",
+    "name": "user-3",
+    "fullName": "Usuário 3",
+    "email": "user3@email.com",
     "password": "123456789@",
-    "cpf": "11234567800",
+    "cpf": "21234567800",
     "position": "user",
     "photoUrl": "https://cdn.icon-icons.com/icons2/788/PNG/512/user-1_icon-icons.com_65106.png"
 }
@@ -28,8 +28,15 @@ Content-Type: application/json
 
 ###
 
+# @name fetch-users
+GET {{baseUrl}}/accounts
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
 # @name fetch-user
-GET {{baseUrl}}/accounts/e0446412-ec9c-452a-bac7-095d85012fc7
+GET {{baseUrl}}/accounts/226adfed-848d-408c-96e7-38011322ca93
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
@@ -46,6 +53,13 @@ Authorization: Bearer {{authToken}}
     "email": "admin4@email.com",
     "position": "admin"
 }
+
+###
+
+# @name delete-user
+DELETE {{baseUrl}}/accounts/6f05c407-933c-4edf-9a91-502038487f6a
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 
 ###

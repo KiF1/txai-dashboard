@@ -61,10 +61,6 @@ Para rodar o front-end, siga os passos abaixo:
    ```bash
    npm run dev
 
-4. **Editar Usuário - Admin:**
-   - Para Editar um usuário existente como Admin acesse: http://localhost:5173/user/:idUsuarioQueDesejaEditar
-   - Exemplo: http://localhost:5173/user/asdasdasdawqdqd
-
 
 ## 📂 Estrutura do Projeto
 
@@ -131,10 +127,11 @@ server/
 │   ├── controllers/         # Controladores que definem as rotas e a lógica associada.
 │        ├── authenticate.controller.ts # Controlador para autenticação do usuário.
 │        ├── create-account.controller.ts # Controlador para criação de usuários.
+│        ├── fetch-accounts.controller.ts # Controlador para busca de usuários.
 │        ├── create-product.controller.ts # Controlador para criação de produtos.
 │        ├── delete-product.controller.ts # Controlador para deleção de produtos.
 │        ├── delete-account.controller.ts # Controlador para deleção de usuários.
-│        ├── fetch-account.controller.ts # Controlador para busca de usuários.
+│        ├── fetch-account.controller.ts # Controlador para busca de usuário.
 │        ├── fetch-product.controller.ts # Controlador para busca de um produto.
 │        ├── fetch-products.controller.ts # Controlador para busca de produtos.
 │        ├── upload-photo.controller.ts # Controlador para upload de imagens no AWS S3.

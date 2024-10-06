@@ -69,7 +69,8 @@ export function EditUser(){
     },
     onSuccess: async () => {
       toast.success('Usuário editado com sucesso!');
-      queryClient.invalidateQueries({ queryKey: ['userFetched'] });
+      queryClient.invalidateQueries({ queryKey: ["userFetched"] });
+      queryClient.invalidateQueries({ queryKey: ["users"] });
     },
     onError: (error) => {
       toast.error(error.message);
