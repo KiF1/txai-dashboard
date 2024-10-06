@@ -62,7 +62,8 @@ Para rodar o front-end, siga os passos abaixo:
    npm run dev
 
 4. **Editar Usuário - Admin:**
-   - Para Editar um usuário como Admin acesse: http://localhost:5173/:idUsuarioQueDesejaEditar
+   - Para Editar um usuário existente como Admin acesse: http://localhost:5173/:idUsuarioQueDesejaEditar
+   - Exemplo: http://localhost:5173/asdasdasdawqdqd
 
 
 ## 📂 Estrutura do Projeto
