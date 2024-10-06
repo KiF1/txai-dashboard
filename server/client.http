@@ -6,13 +6,13 @@ POST {{baseUrl}}/accounts
 Content-Type: application/json
 
 {
-    "name": "admin",
-    "fullName": "admin",
-    "email": "admin4@email.com",
+    "name": "user-1",
+    "fullName": "Usuário 1",
+    "email": "user1@email.com",
     "password": "123456789@",
-    "cpf": "01234567800",
-    "position": "admin",
-    "photoUrl": "https://avatars.githubusercontent.com/u/96916125?v=4"
+    "cpf": "11234567800",
+    "position": "user",
+    "photoUrl": "https://cdn.icon-icons.com/icons2/788/PNG/512/user-1_icon-icons.com_65106.png"
 }
 
 ###

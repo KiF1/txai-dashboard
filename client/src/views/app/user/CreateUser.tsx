@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query'
 import { api } from '../../../services/axios'
 import toast from 'react-hot-toast'
 import { Toast } from '../../../components/Toast'
+import { verifyTokenSaved } from '../../../utils/verifyToken'
 
 const createAccountFormSchema = z.object({
   name: z.string().min(1, { "message": "Informe o apelido usuário" }),
@@ -24,12 +25,13 @@ type CreateAccountForm = z.infer<typeof createAccountFormSchema>;
 
 export function CreateUser(){
   const navigate = useNavigate()
+  const userLogged = verifyTokenSaved();
 
   const [passwordsNotEquals, setPasswordsNotEquals] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [preview, setPreview] = useState<string | null>(null)
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<CreateAccountForm>({
-    resolver: zodResolver(createAccountFormSchema),
+    resolver: zodResolver(createAccountFormSchema)
   });
   
   const { mutate, isPending } = useMutation({
@@ -69,6 +71,10 @@ export function CreateUser(){
     setValue("photoUrl", files[0]);
   }
 
+  function redirectToDashboard(){
+    navigate('/', { replace: true })
+  }
+
   function redirectToLogin(){
     navigate('/sign-in', { replace: true })
   }
@@ -79,7 +85,7 @@ export function CreateUser(){
       <div className='w-[65%] flex flex-col gap-6'>
         <img src={Logo} className='w-fit h-fit' />
         <div className='flex flex-col gap-2'>
-          <strong className="text-3xl text-black font-bold">Faça seu cadastro</strong>
+          <strong className="text-3xl text-black font-bold">{userLogged ? 'Crie um usuário' : 'Faça seu cadastro'}</strong>
           <span className='text-sm text-gray-600 font-normal'>*Campos obrigatórios</span>
         </div>
         <label htmlFor="media" className="w-fit flex cursor-pointer items-end gap-1.5 text-sm text-green-600 rounded-md" >
@@ -88,10 +94,10 @@ export function CreateUser(){
                 <img
                   src={preview}
                   alt=""
-                  className="aspect-video w-14 h-14 rounded-full object-cover"
+                  className="aspect-video w-14 h-14 rounded-full object-cover border-2 border-green-600"
                 />
               ) : (
-                <div className='w-14 h-14 flex justify-center items-center bg-blue-600 rounded-full'>
+                <div className='w-14 h-14 flex justify-center items-center bg-blue-600 rounded-full border-2 border-green-600'>
                   <span className='text-4xl text-white text-center'>S</span>
                 </div>
               )}
@@ -171,10 +177,17 @@ export function CreateUser(){
           </div>
         </div>
         <div className='flex justify-end items-center gap-8'>
-          <button type='button' onClick={redirectToLogin} className='flex items-center gap-2 text-gray-600 font-sm font-normal'>
-            <ArrowUturnLeftIcon className='w-4 h-4' color='#8E9595' />
-            Voltar ao Login
-          </button>
+          {userLogged ? (
+            <button type='button' onClick={redirectToDashboard} className='flex items-center gap-2 text-gray-600 font-sm font-normal'>
+              <ArrowUturnLeftIcon className='w-4 h-4' color='#8E9595' />
+              Voltar ao Dashboard
+            </button>
+          ) : (
+            <button type='button' onClick={redirectToLogin} className='flex items-center gap-2 text-gray-600 font-sm font-normal'>
+              <ArrowUturnLeftIcon className='w-4 h-4' color='#8E9595' />
+              Voltar ao Login
+            </button>
+          )}
           <button type="submit" disabled={isPending} className='w-[200px] p-2 bg-green-600 text-white font-sm font-medium rounded disabled:cursor-not-allowed disabled:opacity-50'>Concluir Cadastro</button>
         </div>
       </div>

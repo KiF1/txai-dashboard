@@ -11,6 +11,7 @@ import { Toast } from '../../../components/Toast'
 import { fetchUserData, User } from '../../../hooks/fetchUserData'
 import ReactLoading from 'react-loading'
 import { queryClient } from '../../../services/react-query'
+import { ArrowUturnLeftIcon } from '@heroicons/react/16/solid'
 
 const editUserFormSchema = z.object({
   name: z.string().min(1, { "message": "Informe o apelido usuário" }),
@@ -75,6 +76,10 @@ export function EditUser(){
     }
   })
 
+  function redirectToDashboard(){
+    navigate('/', { replace: true })
+  }
+
   useEffect(() => {
     if(userFetched && userLogged){
       if(userFetched?.id !== userLogged.id && userLogged?.position  !== 'admin'){
@@ -94,7 +99,7 @@ export function EditUser(){
               <strong className="text-3xl text-black font-bold">Edite o usuário</strong>
               <span className='text-sm text-gray-600 font-normal'>*Campos obrigatórios</span>
             </div>
-            <img src={preview} alt="" className="aspect-video w-14 h-14 rounded-full object-cover" />
+            <img src={preview} alt="" className="aspect-video w-14 h-14 rounded-full object-cover border-2 border-green-600" />
             <div className='w-full flex flex-col gap-4 mt-12'>
               <div className='w-full grid grid-cols-3 gap-4'>
                 <div className="flex flex-col gap-2">
@@ -156,6 +161,10 @@ export function EditUser(){
               </div>
             </div>
             <div className='flex justify-end items-center gap-8'>
+              <button type='button' onClick={redirectToDashboard} className='flex items-center gap-2 text-gray-600 font-sm font-normal'>
+                <ArrowUturnLeftIcon className='w-4 h-4' color='#8E9595' />
+                Voltar ao Dashboard
+              </button>
               <button type="submit" disabled={isPending} className='w-[200px] p-2 bg-green-600 text-white font-sm font-medium rounded disabled:cursor-not-allowed disabled:opacity-50'>Concluir Edição</button>
             </div>
           </div>

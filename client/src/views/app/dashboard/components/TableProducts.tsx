@@ -39,7 +39,8 @@ export function TableProducts() {
         const formattedDate = createdAt.toLocaleDateString('pt-BR', {
           day: '2-digit',
           month: '2-digit',
-          year: '2-digit'
+          year: '2-digit',
+          timeZone: 'UTC'
         });
         const formattedPrice = product.price.toLocaleString('pt-BR', {
           style: 'currency',

@@ -1,6 +1,6 @@
 import Logo from '../../../../assets/logo.svg'
 import MenuHamburguer from '../../../../assets/hamburguer.svg'
-import { QuestionMarkCircleIcon, CalendarDaysIcon, BellIcon } from '@heroicons/react/16/solid'
+import { QuestionMarkCircleIcon, CalendarDaysIcon, BellIcon, ArrowRightEndOnRectangleIcon } from '@heroicons/react/16/solid'
 import { useNavigate } from 'react-router-dom';
 import { queryClient } from '../../../../services/react-query';
 import { User } from '../../../../hooks/fetchUserData';
@@ -12,6 +12,13 @@ export function HeaderDashboard(){
 
   function redirectToUserProfile(){
     navigate(`/user/${cachedUser?.id}`, { replace: true })
+  }
+
+  function logoutUser(){
+    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
+    queryClient.clear();
+    navigate('/sign-in', { replace: true });
   }
   
   return (
@@ -36,8 +43,12 @@ export function HeaderDashboard(){
           <div className='w-2 h-2 rounded-full bg-red-600 absolute top-0 right-0' />
         </div>
         <button onClick={redirectToUserProfile} className='flex items-center gap-2 bg-transparent border-0'>
-          <img src={cachedUser?.photoUrl} className='w-5 h-5 rounded-full' />
+          <img src={cachedUser?.photoUrl} className='w-8 h-8 rounded-full border-2 border-red-600' />
           <span className='text-sm text-black font-normal'>{cachedUser?.name}</span>
+        </button>
+        <button type="button" onClick={logoutUser} className='py-1 px-4 bg-red-600 gap-2 text-white text-sm font-normal rounded flex items-center'>
+          Sair
+          <ArrowRightEndOnRectangleIcon className='w-4 h-4 text-white' />
         </button>
       </div>
     </div>

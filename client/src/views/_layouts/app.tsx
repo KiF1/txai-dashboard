@@ -2,13 +2,14 @@ import { isAxiosError } from 'axios'
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { api } from '../../services/axios'
+import { verifyTokenSaved } from '../../utils/verifyToken'
 
 export function AppLayout() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
-    if (!token) {
+    const userLogged = verifyTokenSaved();
+    if (!userLogged) {
       navigate('/sign-in', { replace: true });
     }
 

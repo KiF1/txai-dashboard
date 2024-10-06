@@ -15,7 +15,7 @@ export class UploadPhotoController {
   @Post()
   @HttpCode(201)
   @UseInterceptors(FileInterceptor('file'))
-  @ApiOperation({ summary: 'Faz upload de uma foto' }) // Operation summary
+  @ApiOperation({ summary: 'Faz upload de uma foto' }) 
   @ApiResponse({
     status: 201,
     description: 'Foto enviada com sucesso.',
@@ -24,7 +24,7 @@ export class UploadPhotoController {
         photoUrl: 'https://upload-txai.s3.amazonaws.com/nome-do-arquivo.jpg',
       },
     },
-  }) // Success response
+  }) 
   @ApiResponse({
     status: 500,
     description: 'Erro ao enviar o arquivo para o S3.',

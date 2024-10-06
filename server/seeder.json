@@ -14,7 +14,7 @@
         "fullName": "Usuário 1",
         "email": "user1@email.com",
         "password": "123456789@",
-        "cpf": "01234567800",
+        "cpf": "11234567800",
         "position": "user",
         "photoUrl": "https://cdn.icon-icons.com/icons2/788/PNG/512/user-1_icon-icons.com_65106.png"
     },
@@ -111,4 +111,4 @@
         "createdAt": "2024-10-30T15:15:00Z"
     }
   ]
-}
+} 

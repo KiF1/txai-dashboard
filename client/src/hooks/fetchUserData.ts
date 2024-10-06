@@ -13,12 +13,12 @@ export interface User{
   photoUrl: string;
 }
 
-const idUser = getIdUser();
 
 export function fetchUserData(){
   const request = useQuery<User>({
     queryKey: ["user"],
     queryFn: async () => {
+      const idUser = await getIdUser();
       const response = await api.get(`/accounts/${idUser}`);
       return response.data;
     }

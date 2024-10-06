@@ -2,13 +2,14 @@ import Login from '../../assets/login.svg'
 import Background from '../../assets/background.png'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { verifyTokenSaved } from '../../utils/verifyToken'
 
 export function AuthLayout() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
+    const userLogged = verifyTokenSaved();
+    if (userLogged) {
       navigate('/', { replace: true })
     }
   }, [navigate]);
